@@ -1,0 +1,51 @@
+﻿@model FacturaModel
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+  <div class="card-header">
+    Editar datos de factura
+  </div>
+  <div class="card-body">
+    
+      <form asp-action="Editar" asp-controller="Mantenedor" method="post">
+          <input asp-for="Idcliente" type="hidden" class="form-control">
+          <div class="mb-3">
+            <label  class="form-label">Nombre*</label>
+            <input asp-for="Nombre" type="text" class="form-control">
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Documento*</label>
+            <input asp-for="Documento" type="text" class="form-control">
+            <span asp-validation-for="Documento" class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Fecha*</label>
+            <input asp-for="Fecha_factura" type="date" class="form-control">
+            <span asp-validation-for="Fecha_factura" class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Valor*</label>
+            <input asp-for="Valor_factura" type="text" class="form-control">
+            <span asp-validation-for="Valor_factura" class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Estado* (Registrar "0" si la factura está vencida o vigente, o "1" si ya fue pagada)</label>
+            <input asp-for="Estado_Factura" type="text" class="form-control">
+            <span asp-validation-for="Estado_Factura" class="text-danger"></span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Descripcion* (VIGENTE, VENCIDA o PAGADA)</label>
+            <input asp-for="Descripcion" type="text" class="form-control">
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+          </div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <a asp-action="Listar" asp-controller="Mantenedor" class="btn btn-warning">Volver a la tabla</a> 
+      </form>
+
+  </div>
+</div>
+

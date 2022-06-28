@@ -1,0 +1,29 @@
+﻿@model DocumentoModel
+@{
+    ViewData["Title"] = "Consultar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="card">
+  <div class="card-header">
+    Monto total de facturas no pagas por cliente 
+  </div>
+  <div class="card-body">
+      <form asp-action="ConsultarByDocumento" asp-controller="Mantenedor" method="post">
+          <div class="mb-3">
+            <label  class="form-label">Documento*</label>
+            <input asp-for="Documento" type="text" class="form-control" value="@ViewBag.Documento">
+            <span asp-validation-for="Documento" class="text-danger"></span>
+          </div>
+          <button type="submit" class="btn btn-primary">Consultar</button> 
+      </form>
+      <br />
+      <div class="alert alert-success" role="alert">
+          El monto de las facturas de este cliente es: @ViewBag.Valor
+      </div>
+      <br />
+      <a asp-action="Listar" asp-controller="Mantenedor" class="btn btn-warning">Volver a la lista principal</a>
+  </div>
+</div>

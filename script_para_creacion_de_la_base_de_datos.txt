@@ -1,0 +1,80 @@
+--SCRIPT PARA LA CREACION DE LA BASE DE DATOS EN SQL SERVER
+
+create database PUNTO1
+
+USE PUNTO1
+
+--TABLA DE DATOS DE LAS FACRURAS
+CREATE TABLE REGISTRO(
+Idcliente int identity primary key,
+Nombre varchar(200),
+Documento int,
+Fecha_factura datetime,
+Valor_factura numeric(18,0),
+Estado_factura numeric(2,0),
+Descripcion varchar(20),
+)
+
+--PROCEDURE PARA LISTAR LAS FACTURAS
+create procedure Listar
+as
+begin
+	select * from REGISTRO
+end
+
+--PROCEDURE PARA OBTENER UNA FACTURA POR SEPARADO
+create procedure Obtener(
+@Idcliente int
+)
+as
+begin
+	select * from REGISTRO where Idcliente = @Idcliente
+end
+
+--PROCEDURE PARA GUARDAR UNA NUEVA FACTURA
+create procedure Guardar(
+@Nombre varchar(200),
+@Documento int,
+@Fecha_factura datetime,
+@Valor_factura numeric(18,0),
+@Estado_factura numeric(2,0),
+@Descripcion varchar(20)
+)
+as
+begin
+	insert into REGISTRO(Nombre,Documento,Fecha_factura,Valor_factura,Estado_factura,Descripcion) values (@Nombre,@Documento,@Fecha_factura,@Valor_factura,@Estado_factura,@Descripcion)
+end
+
+--PROCEDURE PARA EDITAR LOS DATOS DE UNA FACTURA
+create procedure Editar(
+@Idcliente int,
+@Nombre varchar(200),
+@Documento int,
+@Fecha_factura datetime,
+@Valor_factura numeric(18,0),
+@Estado_factura numeric(2,0),
+@Descripcion varchar(20)
+)
+as
+begin
+	UPDATE REGISTRO set Nombre = @Nombre, Documento = @Documento ,Fecha_factura = @Fecha_factura ,Valor_factura = @Valor_factura ,Estado_factura = @Estado_factura ,Descripcion = @Descripcion  where Idcliente = @Idcliente
+end
+
+--PROCEDURE PARA ELIMINAR UNA FACTURA
+create procedure Eliminar(
+@Idcliente int
+)
+as
+begin
+	delete from REGISTRO where Idcliente = @Idcliente
+end
+
+--PROCEDURE PARA CONSULTAR LAS FACTURAS QUE DEBE CADA CLIENTE SEGUN BUSQUEDA POR DOCUMENTO
+--para crear el procedure cambiar la palabara "alter" por "create"
+alter procedure sp_Consultar(
+@Documento int
+)
+as
+begin
+	select * from REGISTRO where Documento = @Documento and Estado_factura = 0
+end
